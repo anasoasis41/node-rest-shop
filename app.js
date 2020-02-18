@@ -7,6 +7,17 @@ const mongoose = require('mongoose');
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 
+mongoose.connect(
+    "mongodb+srv://node-shop:" + 
+    process.env.MONGO_ATLASS_PW + 
+    "@node-rest-shop-u9rh3.mongodb.net/test?retryWrites=true&w=majority",
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+);
+mongoose.Promise = global.Promise;
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
@@ -27,16 +38,6 @@ app.use((req, res, next) => {
 // Routes which should handle requests
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
-
-mongoose.connect(
-    "mongodb+srv://node-shop:" + 
-    process.env.MONGO_ATLASS_PW + 
-    "@node-rest-shop-u9rh3.mongodb.net/test?retryWrites=true&w=majority",
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }
-    );
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
