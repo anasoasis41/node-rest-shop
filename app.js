@@ -13,6 +13,7 @@ mongoose.connect(
     process.env.MONGO_ATLASS_PW + 
     "@node-rest-shop-u9rh3.mongodb.net/test?retryWrites=true&w=majority",
     {
+        useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true
     }
